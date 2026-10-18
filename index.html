@@ -1,0 +1,1190 @@
+<!doctype html>
+<html lang="kk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>body{margin:0}</style>
+<title>AD poem</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400;1,7..72,600&family=Golos+Text:wght@400;500;600&display=swap">
+<style>
+/* Concept: the page is a sky. Day = dawn with a slow sun, night = deep indigo with stars, a moon and aurora. Poems sit on frosted glass. */
+:root {
+  --bg: #f1d9ea;
+  --fg: #2a1745;
+  --muted: #5b4a7c;
+  --line: rgba(42, 23, 69, 0.16);
+  --accent: #a21f5c;
+  --accent-ink: #ffffff;
+  --gold: #e49b0f;
+  --teal: #0f7b74;
+  --glass: rgba(255, 255, 255, 0.58);
+  --glass-strong: rgba(255, 255, 255, 0.88);
+  --glass-line: rgba(255, 255, 255, 0.75);
+  --shadow: rgba(80, 40, 120, 0.35);
+  --sky-top: #c9d6ff;
+  --title-grad: linear-gradient(100deg, #8f1d5a, #e0572f);
+  --font-display: "Literata", Georgia, "Times New Roman", serif;
+  --font-ui: "Golos Text", "Segoe UI", Arial, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #120a30;
+    --fg: #f4effc;
+    --muted: #bdb0da;
+    --line: rgba(255, 255, 255, 0.14);
+    --accent: #ff9cc6;
+    --accent-ink: #1b0a2a;
+    --gold: #ffd27a;
+    --teal: #7be3d6;
+    --glass: rgba(24, 15, 52, 0.55);
+    --glass-strong: rgba(18, 11, 40, 0.84);
+    --glass-line: rgba(255, 255, 255, 0.12);
+    --shadow: rgba(0, 0, 0, 0.6);
+    --sky-top: #04030c;
+    --title-grad: linear-gradient(100deg, #ffe29a, #ffb3d1 55%, #9ad7ff);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #120a30;
+  --fg: #f4effc;
+  --muted: #bdb0da;
+  --line: rgba(255, 255, 255, 0.14);
+  --accent: #ff9cc6;
+  --accent-ink: #1b0a2a;
+  --gold: #ffd27a;
+  --teal: #7be3d6;
+  --glass: rgba(24, 15, 52, 0.55);
+  --glass-strong: rgba(18, 11, 40, 0.84);
+  --glass-line: rgba(255, 255, 255, 0.12);
+  --shadow: rgba(0, 0, 0, 0.6);
+  --sky-top: #04030c;
+  --title-grad: linear-gradient(100deg, #ffe29a, #ffb3d1 55%, #9ad7ff);
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 96px; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-ui);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-text-size-adjust: 100%;
+  overflow-x: hidden;
+}
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); background: var(--sky-top); z-index: 40; }
+.gutter { padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.wrap { max-width: 1120px; margin: 0 auto; }
+a { color: inherit; }
+button, select { font-family: inherit; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+/* sky layers */
+.sky { position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; }
+.sky-day { background: linear-gradient(180deg, #c9d6ff 0%, #f7d6e8 55%, #ffe3bd 100%); opacity: 1; transition: opacity 0.9s ease; }
+.sky-night { background: linear-gradient(180deg, #04030c 0%, #120a30 55%, #2b1356 100%); opacity: 0; transition: opacity 0.9s ease; }
+:root[data-theme="dark"] .sky-day { opacity: 0; }
+:root[data-theme="dark"] .sky-night { opacity: 1; }
+.cloud { position: absolute; width: 520px; height: 160px; border-radius: 50%; background: radial-gradient(closest-side, rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0)); animation: drift 70s ease-in-out infinite alternate; }
+.cloud.c1 { top: 12%; left: -6%; }
+.cloud.c2 { top: 42%; right: -10%; width: 640px; animation-duration: 95s; animation-delay: -30s; }
+.cloud.c3 { bottom: 6%; left: 18%; width: 460px; animation-duration: 80s; animation-delay: -12s; }
+.aur { position: absolute; width: 90vmax; height: 55vmax; border-radius: 50%; animation: float 26s ease-in-out infinite alternate; }
+.aur.a1 { left: -30vmax; bottom: -30vmax; background: radial-gradient(closest-side, rgba(70, 210, 190, 0.42), rgba(70, 210, 190, 0)); }
+.aur.a2 { right: -35vmax; bottom: -25vmax; background: radial-gradient(closest-side, rgba(255, 110, 190, 0.34), rgba(255, 110, 190, 0)); animation-duration: 32s; animation-delay: -10s; }
+#stars { position: fixed; inset: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
+@keyframes drift { from { transform: translateX(-4vw); } to { transform: translateX(8vw); } }
+@keyframes float { from { transform: translate(0, 0) scale(1); } to { transform: translate(6vw, -6vh) scale(1.12); } }
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes bob { from { transform: translateY(-8px); } to { transform: translateY(10px); } }
+@media (prefers-reduced-motion: reduce) { .cloud, .aur, .sun::before, .orb { animation: none !important; } }
+
+.glass { background: var(--glass); border: 1px solid var(--glass-line); backdrop-filter: blur(16px) saturate(1.2); -webkit-backdrop-filter: blur(16px) saturate(1.2); box-shadow: 0 24px 60px -28px var(--shadow); }
+
+/* header */
+.top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 30; padding-top: 10px; }
+.top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 8px; min-height: 60px; padding: 0 8px 0 18px; border-radius: 999px; }
+.brand { display: flex; align-items: center; gap: 10px; text-decoration: none; min-width: 0; }
+.brand svg { width: 34px; height: 34px; color: var(--accent); flex: none; }
+.brand span { font-family: var(--font-display); font-size: 1.15rem; font-weight: 600; white-space: nowrap; }
+.right { display: flex; align-items: center; gap: 4px; }
+nav { display: flex; gap: 2px; }
+nav a { text-decoration: none; color: var(--muted); font-size: 0.95rem; padding: 10px 14px; border-radius: 999px; }
+nav a:hover { color: var(--fg); background: var(--glass-strong); }
+.theme { width: 44px; height: 44px; display: grid; place-items: center; border: 0; border-radius: 50%; background: var(--glass-strong); color: var(--fg); cursor: pointer; }
+.theme:hover { color: var(--accent); }
+.theme svg { width: 22px; height: 22px; }
+.i-sun { display: none; }
+:root[data-theme="dark"] .i-sun { display: block; }
+:root[data-theme="dark"] .i-moon { display: none; }
+
+/* hero */
+.hero { --orb: clamp(150px, 24vw, 280px); display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); grid-template-areas: "copy stage" "quote stage"; column-gap: 48px; row-gap: 40px; align-items: center; padding-block: 56px 72px; }
+.copy { grid-area: copy; min-width: 0; }
+.stage { grid-area: stage; display: grid; place-items: center; min-height: calc(var(--orb) * 1.9); }
+.quote-wrap { grid-area: quote; min-width: 0; }
+.orb { position: relative; width: var(--orb); height: var(--orb); animation: bob 9s ease-in-out infinite alternate; }
+.sun, .moon { position: absolute; inset: 0; border-radius: 50%; transition: opacity 0.9s ease, transform 0.9s ease; }
+.sun { background: radial-gradient(circle at 35% 32%, #fffbe0 0%, #ffe08a 38%, #ffa45c 100%); box-shadow: 0 0 50px 10px rgba(255, 170, 80, 0.55), 0 0 140px 50px rgba(255, 110, 150, 0.28); }
+.sun::before { content: ""; position: absolute; inset: -32%; border-radius: 50%; background: repeating-conic-gradient(rgba(255, 176, 80, 0.62) 0 3deg, transparent 3deg 12deg); -webkit-mask: radial-gradient(circle, transparent 0 58%, #000 60% 96%, transparent 100%); mask: radial-gradient(circle, transparent 0 58%, #000 60% 96%, transparent 100%); animation: spin 120s linear infinite; }
+.moon { opacity: 0; transform: translateY(-45%) scale(0.8); background: radial-gradient(circle at 38% 34%, #fffdf2 0%, #f4ead0 55%, #d8c995 100%); box-shadow: 0 0 40px 8px rgba(255, 240, 190, 0.45), 0 0 120px 40px rgba(150, 130, 255, 0.3); }
+.moon::after { content: ""; position: absolute; inset: 0; border-radius: 50%; background: radial-gradient(circle at 64% 28%, rgba(120, 100, 60, 0.22) 0 7%, transparent 8%), radial-gradient(circle at 34% 62%, rgba(120, 100, 60, 0.18) 0 11%, transparent 12%), radial-gradient(circle at 70% 70%, rgba(120, 100, 60, 0.16) 0 6%, transparent 7%); }
+:root[data-theme="dark"] .sun { opacity: 0; transform: translateY(45%) scale(0.8); }
+:root[data-theme="dark"] .moon { opacity: 1; transform: none; }
+.eyebrow { display: flex; align-items: center; gap: 10px; font-size: 0.8rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); font-weight: 600; margin: 0 0 18px; }
+.eyebrow svg, h2 svg { width: 14px; height: 14px; color: var(--gold); fill: currentColor; flex: none; }
+.hero h1 { font-family: var(--font-display); font-weight: 600; font-size: clamp(2.6rem, 8vw, 5rem); line-height: 1.04; letter-spacing: -0.02em; margin: 0 0 22px; text-wrap: balance; }
+.hero h1 em { font-style: italic; background: var(--title-grad); -webkit-background-clip: text; background-clip: text; color: transparent; padding-right: 0.08em; }
+.lead { color: var(--muted); font-size: 1.12rem; max-width: 44ch; margin: 0 0 30px; }
+.btn { display: inline-flex; align-items: center; justify-content: center; min-height: 52px; padding: 0 30px; border-radius: 999px; background: var(--accent); color: var(--accent-ink); font: 600 1rem var(--font-ui); text-decoration: none; border: 0; cursor: pointer; box-shadow: 0 14px 34px -14px var(--accent); }
+.btn:hover { filter: brightness(1.08); }
+.quote { margin: 0; border-radius: 18px; padding: 28px 30px; }
+.quote p { margin: 0; font-family: var(--font-display); font-style: italic; font-size: clamp(1.25rem, 3vw, 1.6rem); line-height: 1.4; }
+.quote cite { display: block; margin-top: 14px; font: 400 0.88rem var(--font-ui); font-style: normal; color: var(--muted); }
+
+/* sections */
+section { padding-block: 56px; }
+h2 { display: flex; align-items: center; gap: 12px; font-family: var(--font-display); font-size: clamp(1.7rem, 4.5vw, 2.4rem); font-weight: 600; margin: 0 0 26px; letter-spacing: -0.01em; }
+
+/* poems */
+.chips { display: flex; gap: 8px; overflow-x: auto; padding: 2px 2px 10px; margin: 0 0 20px; scrollbar-width: thin; }
+.chip { flex: none; min-height: 42px; padding: 0 20px; border-radius: 999px; color: var(--muted); font: 500 0.92rem var(--font-ui); cursor: pointer; }
+.chip:hover { color: var(--fg); }
+.chip[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.reader { display: grid; grid-template-columns: 290px minmax(0, 1fr); gap: 28px; align-items: start; }
+.poem-list { position: sticky; top: 96px; max-height: calc(100vh - 120px); overflow-y: auto; display: flex; flex-direction: column; gap: 2px; padding: 10px; border-radius: 18px; }
+.poem-list button { text-align: left; background: transparent; border: 0; border-left: 3px solid transparent; border-radius: 8px; padding: 11px 14px; color: var(--muted); cursor: pointer; min-height: 46px; }
+.poem-list button b { display: block; font: 600 1rem var(--font-ui); color: inherit; }
+.poem-list button small { display: block; margin-top: 2px; font-size: 0.8rem; opacity: 0.85; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.poem-list button:hover { color: var(--fg); background: var(--glass-strong); }
+.poem-list button[aria-current="true"] { color: var(--fg); border-left-color: var(--accent); background: var(--glass-strong); }
+.pick { display: none; width: 100%; min-height: 50px; padding: 0 16px; margin: 0 0 16px; border-radius: 14px; font: 500 1rem var(--font-ui); color: var(--fg); }
+.page { background: var(--glass-strong); border: 1px solid var(--glass-line); border-radius: 22px; padding: clamp(26px, 5vw, 60px); min-width: 0; scroll-margin-top: 96px; backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); box-shadow: 0 30px 80px -34px var(--shadow); }
+.page h3 { font-family: var(--font-display); font-size: clamp(1.7rem, 4.5vw, 2.5rem); font-weight: 600; line-height: 1.15; margin: 0; letter-spacing: -0.01em; }
+.page h3::after { content: ""; display: block; width: 64px; height: 3px; margin: 18px 0 30px; border-radius: 3px; background: linear-gradient(90deg, var(--gold), var(--accent)); }
+.stanza { font-family: var(--font-display); font-size: 1rem; line-height: 1.75; margin: 0 0 1.3em; white-space: pre-line; max-width: 48ch; overflow-wrap: anywhere; }
+.poem-note { margin: 30px 0 0; padding-top: 18px; border-top: 1px solid var(--line); color: var(--muted); font-size: 0.88rem; font-style: italic; max-width: 52ch; }
+.steps { display: flex; justify-content: space-between; gap: 12px; margin-top: 28px; }
+.steps button { flex: 1 1 0; min-width: 0; text-align: left; min-height: 58px; padding: 10px 18px; background: transparent; border: 1px solid var(--line); border-radius: 14px; color: var(--fg); cursor: pointer; }
+.steps button:hover { border-color: var(--accent); }
+.steps button:disabled { opacity: 0.3; cursor: default; border-color: var(--line); }
+.steps button small { display: block; font-size: 0.76rem; color: var(--muted); }
+.steps button b { display: block; font: 600 0.95rem var(--font-ui); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.steps .next { text-align: right; }
+
+/* about + footer */
+.about .box { border-radius: 22px; padding: clamp(26px, 5vw, 48px); }
+.about p { max-width: 56ch; margin: 0; font-size: 1.1rem; color: var(--muted); }
+.about strong { color: var(--fg); }
+footer { padding-block: 24px 36px; color: var(--muted); font-size: 0.9rem; text-align: center; }
+footer svg { width: 12px; height: 12px; color: var(--gold); fill: currentColor; vertical-align: -1px; margin-inline: 8px; }
+
+@media (max-width: 860px) {
+  .hero { grid-template-columns: minmax(0, 1fr); grid-template-areas: "stage" "copy" "quote"; row-gap: 28px; padding-block: 16px 48px; --orb: 140px; }
+  .stage { min-height: 230px; }
+  .reader { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .poem-list { display: none; }
+  .pick { display: block; }
+  section { padding-block: 40px; }
+}
+@media (max-width: 480px) {
+  nav a { padding: 10px 9px; font-size: 0.9rem; }
+  .brand span { font-size: 1.05rem; }
+  .top .wrap { padding-left: 14px; }
+  .steps { flex-direction: column; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .page { animation: rise 0.45s ease both; }
+  .stanza, .poem-note, .steps { animation: rise 0.6s ease both; animation-delay: calc(var(--n, 0) * 70ms + 120ms); }
+  .copy > *, .quote-wrap { animation: rise 0.8s ease both; }
+  .copy > :nth-child(2) { animation-delay: 0.12s; }
+  .copy > :nth-child(3) { animation-delay: 0.24s; }
+  .copy > :nth-child(4) { animation-delay: 0.36s; }
+  .quote-wrap { animation-delay: 0.5s; }
+  @keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+}
+</style>
+<script>
+/* day/night: saved choice first, then the device setting */
+(function () {
+  var t = null;
+  try { t = localStorage.getItem("adTheme"); } catch (e) {}
+  if (t !== "dark" && t !== "light") {
+    t = (window.matchMedia && matchMedia("(prefers-color-scheme: dark)").matches) ? "dark" : "light";
+  }
+  document.documentElement.setAttribute("data-theme", t);
+})();
+</script>
+
+<div class="sky sky-day" aria-hidden="true"><i class="cloud c1"></i><i class="cloud c2"></i><i class="cloud c3"></i></div>
+<div class="sky sky-night" aria-hidden="true"><i class="aur a1"></i><i class="aur a2"></i></div>
+<canvas id="stars" aria-hidden="true"></canvas>
+
+<header class="top gutter">
+  <div class="wrap glass">
+    <a class="brand" href="#top" aria-label="AD poem">
+      <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true">
+        <circle cx="24" cy="24" r="22"/>
+        <path d="M11 33 L19.5 13 L28 33 M14.4 26 H24.6" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M31 13 H34.5 C40 13 40 33 34.5 33 H31 Z" stroke-linejoin="round"/>
+      </svg>
+      <span>AD poem</span>
+    </a>
+    <div class="right">
+      <nav aria-label="Бөлімдер">
+        <a href="#poems">Өлеңдер</a>
+        <a href="#about">Автор</a>
+      </nav>
+      <button class="theme" id="themeBtn" type="button" aria-label="Күн және түн режимін ауыстыру" title="Күн / түн">
+        <svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 14.2A8.5 8.5 0 1 1 9.8 3.5a6.8 6.8 0 0 0 10.7 10.7z"/></svg>
+        <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.3M12 19.2v2.3M2.5 12h2.3M19.2 12h2.3M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M18.7 5.3l-1.6 1.6M6.9 17.1l-1.6 1.6"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+  <div class="gutter">
+    <div class="wrap hero">
+      <div class="stage" aria-hidden="true">
+        <div class="orb"><div class="sun"></div><div class="moon"></div></div>
+      </div>
+      <div class="copy">
+        <p class="eyebrow"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1 L14.4 9.6 L23 12 L14.4 14.4 L12 23 L9.6 14.4 L1 12 L9.6 9.6Z"/></svg>Өлеңдер</p>
+        <h1>Жүректен шыққан <em>сөз</em></h1>
+        <p class="lead">Мен Асадуллаев Дәулет, өлең жазамын. Төменде өз өлеңдерімді оқуға болады.</p>
+        <a class="btn" href="#poems">Өлеңдерді оқу</a>
+      </div>
+      <div class="quote-wrap">
+        <figure class="quote glass">
+          <p>Еш қашан да берілме!<br>Жақсы күндер келер алда.</p>
+          <cite>«Мұңайма» өлеңінен</cite>
+        </figure>
+      </div>
+    </div>
+  </div>
+
+  <section id="poems" class="gutter">
+    <div class="wrap">
+      <h2><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1 L14.4 9.6 L23 12 L14.4 14.4 L12 23 L9.6 14.4 L1 12 L9.6 9.6Z"/></svg>Өлеңдер</h2>
+      <div class="chips" id="chips" role="group" aria-label="Тақырып бойынша сүзгі"></div>
+      <select class="pick glass" id="pick" aria-label="Өлең таңдау"></select>
+      <div class="reader">
+        <nav class="poem-list glass" id="list" aria-label="Өлеңдер тізімі"></nav>
+        <article class="page" id="page" aria-live="polite"></article>
+      </div>
+    </div>
+  </section>
+
+  <section id="about" class="about gutter">
+    <div class="wrap">
+      <div class="box glass">
+        <h2><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1 L14.4 9.6 L23 12 L14.4 14.4 L12 23 L9.6 14.4 L1 12 L9.6 9.6Z"/></svg>Автор</h2>
+        <p><strong>Асадуллаев Дәулет</strong>. Өлең жазамын. Өмір, уақыт, ана тілі және адам жаны туралы ойларымды өлеңмен айтамын.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="gutter">
+  AD poem<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1 L14.4 9.6 L23 12 L14.4 14.4 L12 23 L9.6 14.4 L1 12 L9.6 9.6Z"/></svg>© 2026 Асадуллаев Дәулет
+</footer>
+
+<script>
+var POEMS = [
+{ title: "Бетперделер", cat: "Өмір", text: `Бетперде киген жандар,
+Айналамда толды.
+Тура жолдан адасып,
+Бәрі қайда бет алды?
+
+Ішкі жан дүниеде күрес,
+Тоқтаусыз жүруде.
+Оған қоса қайғы мұңдар,
+Жүрекке салмақ түсіруде.
+
+Бөлмені басты қараңғылық,
+Ұйқысыз түндер көбейді.
+Жүрекке қолып қайғы-мұң,
+Жүзден күлкі көп кетті.
+
+Шаршадым жалған дүние алдауынан,
+Тынымсыз келетін сынақтардан,
+
+Айтшы, уақыт артқа қарай қайтама?
+Балалықты тағы бір рет қайтарама?
+Амал жоқ тағдырға мен көнемін,
+Алдымнан шам шырақ табылғанша.
+
+Бетперделер шешілмей,
+Шындықты кім айтады?
+Жүрекке жарқын сәттер,
+Бірақ үміт қайтады.
+
+Түндерімде жалғызбын,
+Таңым атарма күліп?
+Барлығына төзермін,
+Үмітпен алға жүріп.
+
+Жалғыз қалдым қорқынышты тұман арасында,
+Тірі жан жоқ, менен басқа айналада.
+Көрер қиындық, қауіп қатер алда шығар,
+Сонда да берілмеймін еш қашан да.
+
+Көрдім залым, зұлымдарды көзіммен ,
+Үрей менен қорқыныш болды жан ішінде.
+Сонда да мен берілмедім,
+Жүрек пенен сырласып әр кезеңде.
+
+Бара-бара өмір қиындап барама?
+Әлде адамдар өзгерді бұл жаханда.
+Тағдырға көнгенен басқа амал жоқ,
+Қалсамда қорқынышты тұман арасында.
+
+Айтшы, уақыт артқа қарай қайтама?
+Балалықты тағы бір рет қайтарама?
+Амал жоқ тағдырға мен көнемін,
+Алдымнан шам шырақ табылғанша.
+
+Бетперделер шешілмей,
+Шындықты кім айтады?
+Жүрекке жарқын сәттер,
+Бірақ үміт қайтады.
+
+Түндерімде жалғызбын,
+Таңым атарма күліп?
+Барлығына төзермін,
+Үмітпен алға жүріп.` },
+
+{ title: "Уақыт", cat: "Өмір", text: `Адамдар өзгерген,
+Бұрынғыдай емес,
+Шын көңілден құану,
+Бұл заманда оңай емес.
+
+Бірін-бірі алдап, арбайтын,
+Әлде қорғап, сақтайтын.
+Не болсада қазіргі сәт,
+Қымбат қайта оралмайтын.
+
+Уақыт қадірін білмеген,
+Жүргендер көп өмірде.
+Шындық әр кез ащы болар,
+Ұнамайды еш кімгеде.
+
+Жақсылықтан жамандық,
+Озып кетті өмірде.
+Бірін-бірі өсектеді,
+Бес күн жалған дүниеде.
+
+Ұрпақтар көбейіп кетті,
+Ар-намыссыз, санасыз.
+Бірін-бірі сатты-ғой,
+Дүние үшін бағасыз.
+
+Уақыт өте келе дүние,
+Өз құнын жолғалтар.
+Адамилық қасиет,
+Еш қашан да жоғалмас.
+
+Тапты біреулер алмаз,
+Ал біреулер асыл тас.
+Қазіргі заман былай-ғой,
+Дүние үшін қарбалас.
+
+Уақыт - өмірдің үнсіз қаласы,
+Әр нәрсенің бар сұрауы.
+Өз дегенін алады,
+Уақыт деген санаулы.
+
+Өмір, бірде ыстық, бірде суық,
+Көнгеннен басқа амал жоқ.
+Өмір, қиын-қыстау сәттен тұрар,
+Көнгеннен басқа амал жоқ.
+
+Шара қалмады еш қандай,
+Өткенді қайтаратындай.
+Әділдік қалмай бара жатыр,
+Ақшаға сатылған ар-намыстай.
+
+Қазіргі адамзат қандай адам,
+Дүние үшін бәріне барған.
+Құр босқа сөйлеп, жақсыға күліп,
+Кім екенін есінен шығарған.
+
+Заман емес адам өзгерді,
+Менсінбеушілік - жан тәнді биледі.
+Арам ойлар санада жетіліп,
+Жақсы ойлар жаманнан қалып кетті.
+
+Жүрекке әмір жүрмейді екен,
+Сүймегенді сүйу қиын екен.
+Қазіргі таңда махаббат,
+Байлық пен өлшенеді екен.
+
+Бәріне бірдей от шашпаймын,
+Адамдар бар сенетін махаббатқа,
+Тек оны түсінетін ұрпақтың,
+Аз болғаны болмаса.
+
+Уақыт зуылдап өтуде,
+Өткен күнді артқа тастап.
+Кімнің кім екенін біліп,
+Жүрміз әр ортадан.
+
+Мейрім сөніп бара жатыр,
+Бір-бірімізге деген.
+Сыйластық, үміт болсада,
+Жан дүниеміз алай-дүлей.
+
+Жалғыз ғана шам шырақ,
+Меніңше ол қазіргі шақ.
+Бәрі өз қолымыз да,
+Өзіміз ді өзгерте алсақ.` },
+
+{ title: "Ана тіл", cat: "Отан", text: `Тіл халықтың жаны,
+Тарихы бар маңызды.
+Жылдан жылға дамытып,
+Үйретіп жатыр жас ұрпақты.
+
+Ана тілге деген сый,
+Бәріне берген сенімдей.
+Тілін сатқан болмайық,
+Ар, намыссыз мәңгүрттей.
+
+Ана тілі бар елдің,
+Болашағы зор, мықты ел.
+Кең байтақ жерім атамекен,
+Тұғыры мықты, тату ел.
+
+Тілде халықтың мәдениеті,
+Оған қоса өркениеті.
+Сонда да елімнің әр кез,
+Мақсаты бар, жақсы ниеті.
+
+Сөздік қоры таусылмас,
+Ешкім тартып ала алмас.
+Ешқашан да ауыспаспын,
+Ұсынса да мың алмас.` },
+
+{ title: "Мұңайма", cat: "Өмір", text: `Өмірден адамдар түңілген кездер,
+Барлығынан үмітін үзген кездер.
+Баршасынан көңілі қалған кездер,
+Шын жүректен сүйінетін жақының болса,
+Өмірдегі бар бақыт осы екен.
+
+Қаншама адамдар қазір жалғыздық та,
+Бір-бірімен ұрысып, қырылғандар.
+Тым болмаса ұрысатын жақының болса,
+Өмірдегі бар бақыт осы екен.
+
+Балалық кезде кетті бізді тастап,
+Қазір соны сағынамыз шын жүректен.
+Бала кезден бері досың жаныңда болса,
+Өмірдегі бар бақыт осы екен.
+
+Мұңайма
+Мұңаюға себеп барма?
+Өз өміріңде өзің,
+Өз дәуіріңді сүр.
+
+Алға мақсат қойып,
+Болашаққа қадам жаса.
+Еш қашан да берілме!
+Жақсы күндер келер алда.
+
+Жалғыздық та болсаңыз,
+Өкінбеңіз еш қашан.
+Олда бір мүмкіндік,
+Жарқын болашақ үшін.
+
+Өлеңдер ақындар жазды,
+Айтып уақыт туралы.
+Шынын айтсақ ақындар,
+Уақыт қадірлі деп ұғындырады.
+
+Уақыт қадірін біл,
+Бірақ босқа өткіз бе!
+Ішің пысып жалықсаңда,
+Еш қашан да берілме!
+
+Өмір, тұрар сан қилы сынақтардан,
+Сынақтарға сынып қалма.
+Сынақтардан сүрінбей өтсең,
+Жақсы күндер келер алда.
+
+Мұңайма
+Мұңаюға себеп барма?
+Өз өміріңде өзің,
+Өз дәуіріңді сүр.
+
+Алға мақсат қойып,
+Болашаққа қадам жаса.
+Еш қашан да берілме!
+Жақсы күндер келер алда.` },
+
+{ title: "Яссы коледж", cat: "Білім", text: `Біліммен ашып болашаққа жол,
+Өз қолдауын білдірді ұстаздар.
+Арман, мақсатқа апарар жол,
+Коледжден жалғасып жатыр.
+
+Түстім Яссы коледжге.
+Мамандығым бойынша.
+Әр күн жаңа білім алып,
+Болашаққа қадам басуға.
+
+Күнде жаңа өзгерістер,
+Бағындырған көптеп белестер.
+Рахмет айтамыз бәріңізге,
+Коледдің үлкен кішісіне.
+
+Яссы коледж мәңгі есте,
+Жаңа белеске самғаймыз.
+Ұмытылмас естелік пен,
+Көптің жүрегін жаулаймыз.
+
+Бар ойымыз жақсылықта,
+Әлі алда көп асулар,
+Бәрін бірге еңсереміз,
+Жас маманбыз жалындаған.
+
+Бойда таусылмас күш қайрат,
+Яссы барлығын басып озса.
+Ұлттық рухта көтерілген,
+Ұстаз бен мұғалім арқасында.
+
+Коледжде білім алып,
+Шаттанып жүрмін мен қазір.
+Алда сессия келе жатсада,
+Бәріне төзуге мен әзір.
+
+Әрбір студент әр ұстазды.,
+Ата-анасындай сыйлайды.
+Коледж аумағы өте керемет,
+Баруға, кетуге ыңғайлы.
+
+Білім береді тынымсыз,
+Колеждің барлық ұстазы.
+Тәрбие бөлімі, директор да,
+Мінсіз жұмысын атқарады.` },
+
+{ title: "Елімнің батыр тұлғалары", cat: "Отан", text: `Қарап тұрсақ тарихқа,
+Қаншама батырлар болыпты.
+Елімді мәңгі қорғаймын деп,
+Жанын өлімге қиыйпты.
+
+Талай-талай батырлар,
+Елі үшін жан берген.
+Тіпті батыр тұлғалар,
+Махамбет пен Исатай деген.
+
+Ақындардың ақыны,
+Қазақ елінің мақтанышы.
+Абай үлкен тұлға ғой,
+"Қара сөздер" қалдырғаны.
+
+"Мен жастарға сенемін"
+Яғни сенген біздерге.
+Мағжан Жұмабаев болды,
+Кең Қазақстан жерінде.
+
+Ұлт азаттық көтеріліс бастаған,
+Тәуелсіздік алу үшін.
+Кенесары Қасымұлы мен Наурызбай,
+Батырлардың болғанына мақтанам.
+
+Иә, Қазақ хандығын құрғандар,
+Керей мен Жәнібек сұлтандар.
+Әр кез үлгі тұтамыз,
+Сенім алып батырлардан.
+
+"Оян, қазақ!" деп сөз бастаған,
+Міржақып Дулатұлы болған.
+Ал халықты жақсылыққа бастаған,
+Талай-талай билер болған.
+
+"Ақыр заман" атты өлеңінде,
+Шындықты айтқан Мөңке би.
+Әрине әр жырларында,
+Үлкен бір дүние жатыр.
+
+Атақты Бұқар жырау,
+Мәңгі халық есінде.
+Серігі болып Абылай ханның,
+Ақыл айтқан әр ісінде.
+
+Міне менің елімнен,
+Осыншама шыққан тұлғалар.
+Елімді мақтап айта аламын,
+Қарап тұрып тарихыма.` },
+
+{ title: "Енді жоқ", cat: "Махаббат", text: `Жүрегім айтар маған
+Ұмыт деп қайта қайта
+Не үшін сүйген жаным
+Тастады жалғыздықта
+
+Жалғыздық азаб десем,
+Ұмыта алмау азаб екен.
+Ол маған қарап күліп,
+Ұмытты мәңгілікке.
+
+Жүрегімді жаралап кетті неге?
+Жалғыздықта тастады қара түнккке.
+Оны ойлай беруден шаршасамда,
+Ұмыта алмай кеттім айтшы неге?
+
+Жүректі жаулалған қас сұлудың өзі,
+Қайталанбас сұлу қап қара көзі.
+Ерекше мінезі мен қылығы,
+Өмірім өзгерткен түбегейлі.
+
+Қайырмасы:
+Енді жоқ
+Күзді көктем қалып жатқан
+Жақын жоқ
+Қайғыларымды қуанышқа
+Айналтырушы жан жоқ
+
+Жүрегімде қалды аты,
+Көз алдымнан кетпес қарағаны
+Сағындым оны,
+Енді жоқ
+
+Не болсада бәрі артта қалып кетті,
+Көңілде басқаша сезім қалыптасты.
+Жалықсамда сағыныш өртеді кеудемді,
+Үміт артқандарым кетіп барады.
+
+Мейлі күз келіп жапрықтарды сарғайтсын,
+Әлде көктем келіп ақ жауын жаудырсын.
+Бәлкім қыс келіп ақ қарлар жаудырса,
+Сүйгенім қайтып оралама?
+
+Қайырмасы:
+Енді жоқ
+Күзді көктем қалып жатқан
+Жақын жоқ
+Қайғыларымды қуанышқа
+Айналтырушы жан жоқ
+
+Жүрегімде қалды аты,
+Көз алдымнан кетпес қарағаны
+Сағындым оны,
+Енді жоқ` },
+
+{ title: "Еске алдым", cat: "Махаббат", text: `Сағынып кетдім сені,
+Қайда кетіп қалдың жаным?
+Сағынып кетдім сені,
+Менің жалғыз жақыным.
+
+Сағынып кетдім сені,
+Жүрегімнің жартысы.
+Сағынып кетдім сені,
+Қайда кетіп қалдың жаным?
+
+Еске алдым тағы өткен сәттерді,
+Бірге болған қуанышты күндерді.
+Бірге сырсасқан айлы түндерді,
+Бірақ барлығы артта қалып кетті.
+
+Қаншама армандарымыз бар еді,
+Алға қойған мақсаттарда жоқ енді.
+Жарықсыз қалған қураған гүл,
+Сияқты күйге мен қайта ендім.
+
+Санамда сақталды күлген жүздері,
+Қайталанбас қара мөлдір көздері.
+Қайталанбас сұлуымда сен едің,
+Өкінішті менен мәңгі кеттің.
+
+Қайырмасы:
+Жаным, күнім,
+Неге менен мәңгі кеттің?
+Әлде арамызда үшінші адам болды ма?
+Болса да айтпаған едің сен маған.
+
+Соңында барлығы жария болды,
+Үмітсіздік жан дүниемді қаптады.
+Сол күннен бері өмірімде,
+Өзгерістер көптеп орын алды.
+
+Қалайша менен сен кеттің?
+Мендей жігіттен үміт үздің?
+Арамызда қалғаны бір ғана сұрақ,
+Айрылысуға себепші кім?
+
+Иә білемін басында, сені сүйгенім расында,
+Сонда да сен тастадың, неге мені жалғыздық та,
+Қалайша айт?
+Жүрекке әмір жүрмейді екен,
+Сүймегенді сүйу қиын екен.
+
+Аспанға қарасам елестейсің сен,
+Жүректе қалатын екенсің тек сен.
+Қайда болсаң да аман бол жалғызым,
+Жүректі жаулап алған аруым.
+
+Жүрекке жазғанмын сенің атыңды,
+Қарамадың неге жазған хатымды?
+Жаныңда жүрма жақсы адам?
+Сөзіме жауап жоқ...
+
+Күні түні қийналармын,
+Жалғыздық себеп боп.
+Неге айтшы?...
+
+Жалғыздық,
+Тағы қийнайды жалғыздық.
+Оған қоса қайғы мұңдар дердке дерд қосады,
+Сүйетінімді біле тұра өзгені таңдады.
+
+Қайырмасы:
+Жаным, күнім,
+Неге менен мәңгі кеттің?
+Әлде арамызда үшінші адам болды ма?
+Болса да айтпаған едің сен маған.
+
+Соңында барлығы жария болды,
+Үмітсіздік жан дүниемді қаптады.
+Сол күннен бері өмірімде,
+Өзгерістер көптеп орын алды.
+
+Қалайша менен сен кеттің?
+Мендей жігіттен үміт үздің?
+Арамызда қалғаны бір ғана сұрақ,
+Айрылысуға себепші кім?` },
+
+{ title: "Ұстаз", cat: "Білім", text: `Жылдар өтіп кетіпті арадан қара,
+Кеше ғана барған едік бала бақшаға.
+Күздеде, қыстада, көктемде,
+Барар едік алтын ұя мектепке.
+
+Енді міне ұлғайып біздер,
+Болашақта бізге жақындап келер.
+Мәңгілік есте сақтаймыз,
+Ұстаздарды тынымсыз білім берген.
+
+Ұстаз қадірлі жан бұл өмірде,
+Түсіндірді сабақ барысын күнде-күнде.
+Уақыттыңда қадірін білейік,
+Бір күн келіп сағынамыз сол күнді де.
+
+Қай пән ұстазы болса да,
+Жаныма жақын жандарым.
+Ұрысса жаман болсын демеген,
+Қадірлейік ұстаздарды білім берген.` },
+
+{ title: "Мәңгілік", cat: "Өмір", text: `Мәңгілік ке ұмытамын енді мен,
+Жүректегі қайғы-мұңдардың бәрін.
+Ұмытсада ханшайымның өзі,
+Мұңаймаймын кетіп қалса да мәңгі.
+
+Өмір сынағына шыдап өтем,
+Адамдардың сөздерін елемей.
+Арман, мақсатыма қарай жол тартам.
+Тағдырыма разы болған күйімдей.
+
+Бәлкім сынақтар болар,
+Арман, мақсат жолында.
+Сонда да мен берілмеспін,
+Мына бес күн жалғанда.
+
+Жойдым түбегейлі барлығын,
+Жүректегі қайғы-мұңдарды.
+Өткен күнмен өмір сүрмей,
+Шүкір етем әр атқызған таңымды.
+
+Жарқын болашаққа үміт зор,
+Қайтпас қайсар мінез бар.
+Өткен күнге өкініш жоқ.
+Ниет жақсы, мақсат бар.
+
+Әр істе қайыр барын.
+Мәңгілік есте сақтаймын.
+Күліп жүріп, көңілді,
+Айналама нұр сыйлаймын.` },
+
+{ title: "Адамбыз", cat: "Өмір", text: `Біз адамбыз, адамбыз,
+Әлимсахтан бері.
+Жаралып келе жатқан,
+Жалғыз мейрімді жандармыз.
+
+Иә білемін адамбыз,
+Адамға тән жаралғанбыз.
+Қай жерде біз болсақ та,
+Адам болып қаламыз.
+
+Аспанға бір қарасақ,
+Күн нұрын төгіп шашады.
+Адамдарда дәл солай,
+Бір-біріне махаббат нұрын шашады.
+
+Қайырмасы:
+Адамбыз, адамбыз, адамбыз,
+Адамға тән жаралғанбыз.
+Адамбыз, адамбыз, адамбыз,
+Адам болып біз қаламыз.
+
+Адам деген бір ғана,
+Көңілі жас қой ойлана.
+Онда да бар бір мінез,
+Жалғасады ұрпақтан ұрпаққа.
+
+Мейрім нұрын төгеді,
+Тірі жан, өлі адам, басқаға.
+Табиғатты қорғайтын адамдар бар,
+Қарапайым жай ғана.
+
+Ақыл ойы кем емес,
+Жануар оған тең емес.
+Тек қана сабырлығы көп болса,
+Қиындық оған ештеңе емес.
+
+Қайырмасы:
+Адамбыз, адамбыз, адамбыз,
+Адамға тән жаралғанбыз.
+Адамбыз, адамбыз, адамбыз,
+Адам болып біз қаламыз.` },
+
+{ title: "Сәкен Сейфуллин", cat: "Отан", text: `Өмірінің көп бөлігін білім алуға жұмсаған,
+Өмірі қиын болсада қиындықтан қорқпаған.
+Ақын, ағартушы, жазушы.
+Еңбектері мәңгі есте сақталған.
+
+Кешегі КСРО ның заманында,
+Жас ұрпақ үшін барын салғанда.
+Сәкен Сейфуллин бізге де,
+Үлгі тұтар болды тұлға.
+
+Маған ұнайды ақынның,
+Қайтпас қайсар мінезі,
+Тіпті әр кез ел үшін,
+Жанын беруге дайын еді.
+
+Сәкен сынды алыптар,
+Келешек ұрпақ өнеге.
+Артында қалған мұрасы,
+Ілім үшін бізге де.
+
+Ұлт үшін қызмет еткен,
+Өтті өмірі ерлік пен.
+Қайсар рухы шынайы,
+Ақын жыры шындық пен.` },
+
+{ title: "Сағындым", cat: "Махаббат", text: `Айтшы
+Қайда қалды уәделер,
+Айтылмаған көп сөздер
+Айналып болды арманға,
+Сені көру мәңгілік ке.
+
+Енді
+Жүрек еш кімді сүймейді,
+Сүйгені үшін күймейді.
+Азап көру керек емес,
+Жай ғана сенім сөніп кетті.
+
+Өкінішті 
+Еске алсам сол сәттерді,
+Жүрегім аурып кетеді.
+Еске алсам сол кездерді,
+Сағынып үмітім сөнеді.
+
+Қайда екен?
+Мен сүген ару қыз.
+Жалғыздық та емес анық,
+Қуанышта жүр қайғысыз.
+
+Қайырмасы:
+Сағындым сүйіктімді,
+Сағындым сүйгенімді.
+Білсеңіз сағыныш сезімі,
+Өртеп барады кеудемді.
+
+Соңғы рет қараса екен сұлу көзбенен,
+Жылы қабақ танытып, тәтті сөзбенен.
+Тәтті ару екенін белмеседе мейлі,
+Өмірімді түбегейлі өзгерткен қыз сол екен.
+
+(Өмірімді түбегейлі өзгерткен қыз сол екен)
+
+Оны соңғы рет көр алмады өкінішті,
+Соңғы кездесуде күлімсіреп кетті.
+Әттең сонда сезбеген екенмін,
+Мен кетіп жатқанын мәңгі.
+
+Еске алсам сол сәттерді,
+Жүрек езіліп кетеді.
+Еске алсам сол кездерді,
+Көзге жас толып кетеді.
+
+Қайда екен?
+Мен сүйген сұлу қыз.
+Жалғыздықта емес анық,
+Қуанышта жүр қайғысыз.
+
+Соңғы рет көрісейікші,
+Оңашада бірге.
+Сағыныш сезімі қалдыма?
+Тым болмаса жүрегіңде.
+
+Қайырмасы:
+Сағындым сүйіктімді,
+Сағындым сүйгенімді.
+Білсеңіз сағыныш сезімі,
+Өртеп барады кеудемді.
+
+Соңғы рет қараса екен сұлу көзбенен,
+Жылы қабақ танытып, тәтті сөзбенен.
+Тәтті ару екенін белмеседе мейлі,
+Өмірімді түбегейлі өзгерткен қыз сол екен.
+
+(Өмірімді түбегейлі өзгерткен қыз сол екен)` },
+
+{ title: "Туған жерім", cat: "Отан", text: `Туған жерім Қазақстан,
+Болашағы зор көк аспан.
+Қанша батырлар шықты,
+Елі үшін берген жан.
+
+Қасиетті елді мекен,
+Кең байтақ жері көркем.
+Осындай елде өскен,
+Бақытты жан мен екем.
+
+Әр адамның арманы,
+Туған жердің тыныштығы.
+Онсыз болмас адам,
+Өмірдің бар шаттық, қуанышы.
+
+Туған жерді ағайын,
+Қадірлейік әр дайым.
+Махаббат пен қарап көп,
+Жүрейікші әр дайым.
+
+Қазақстан туған жерім, атамекен, көк туым.
+Көк туымда берілген қыран құсым.
+Қыран құстың үстінде күн жарқырап,
+Еседі жел, жерім байтақ, орман нуым.` }
+];
+
+var NOTES = {
+  "Бетперделер": "Бұл өлең адамдардың бетперде киіп, шындықты айтпайтыны, жалғыздық пен үміт туралы.",
+  "Уақыт": "Бұл өлең уақыттың қадірі, адамдардың өзгеруі және заманның қиындығы туралы.",
+  "Ана тіл": "Бұл өлең ана тілінің халық үшін мәні және тілді сақтау туралы.",
+  "Мұңайма": "Бұл өлең өмірдегі қиындыққа берілмей, жақсы күндерге сену туралы.",
+  "Яссы коледж": "Бұл өлең Яссы коледжде оқып жүрген кезім және ұстаздарға алғыс туралы.",
+  "Елімнің батыр тұлғалары": "Бұл өлең қазақ халқының батырлары, ақындары мен билері туралы.",
+  "Енді жоқ": "Бұл өлең жоғалған махаббат пен сағыныш туралы.",
+  "Еске алдым": "Бұл өлең айрылысқан жанды сағыну және өткен күндерді еске алу туралы.",
+  "Ұстаз": "Бұл өлең ұстаздардың қадірі және мектеп күндерін сағыну туралы.",
+  "Мәңгілік": "Бұл өлең қайғы-мұңды артта қалдырып, арман жолында берілмей, шүкір етіп өмір сүру туралы.",
+  "Адамбыз": "Бұл өлең адамның мейірімі, адамгершілігі және адам болып қалу туралы.",
+  "Сәкен Сейфуллин": "Бұл өлең ақын Сәкен Сейфуллиннің өмірі, қайсар мінезі және халыққа қалдырған мұрасы туралы.",
+  "Сағындым": "Бұл өлең сүйген жанды сағыну және оны соңғы рет көргісі келу туралы.",
+  "Туған жерім": "Бұл өлең туған жер Қазақстанға, оның байтақ даласы мен батырларына деген махаббат туралы."
+};
+
+
+var listEl = document.getElementById("list");
+var pageEl = document.getElementById("page");
+var pickEl = document.getElementById("pick");
+var chipsEl = document.getElementById("chips");
+var filter = "Барлығы";
+var current = 0;
+
+function visible() {
+  var r = [];
+  POEMS.forEach(function (p, i) { if (filter === "Барлығы" || p.cat === filter) r.push(i); });
+  return r;
+}
+function firstLine(t) { return t.split("\n")[0]; }
+function mk(tag, cls, text) {
+  var e = document.createElement(tag);
+  if (cls) e.className = cls;
+  if (text !== undefined) e.textContent = text;
+  return e;
+}
+
+function buildList() {
+  listEl.innerHTML = "";
+  pickEl.innerHTML = "";
+  visible().forEach(function (i) {
+    var p = POEMS[i];
+    var b = mk("button");
+    b.type = "button";
+    b.setAttribute("data-i", i);
+    b.appendChild(mk("b", "", p.title));
+    b.appendChild(mk("small", "", firstLine(p.text)));
+    b.addEventListener("click", function () { show(i, false); });
+    listEl.appendChild(b);
+    var o = mk("option", "", p.title);
+    o.value = i;
+    pickEl.appendChild(o);
+  });
+}
+
+function show(i, scroll) {
+  current = i;
+  var p = POEMS[i];
+  var vis = visible();
+  var pos = vis.indexOf(i);
+  Array.prototype.forEach.call(listEl.children, function (b) {
+    if (Number(b.getAttribute("data-i")) === i) b.setAttribute("aria-current", "true");
+    else b.removeAttribute("aria-current");
+  });
+  pickEl.value = String(i);
+
+  pageEl.innerHTML = "";
+  pageEl.appendChild(mk("h3", "", p.title));
+  var parts = p.text.split(/\n\s*\n/);
+  parts.forEach(function (s, k) {
+    var d = mk("p", "stanza", s);
+    d.style.setProperty("--n", Math.min(k, 10));
+    pageEl.appendChild(d);
+  });
+  var after = Math.min(parts.length, 11);
+  if (NOTES[p.title]) {
+    var n = mk("p", "poem-note", NOTES[p.title]);
+    n.style.setProperty("--n", after);
+    pageEl.appendChild(n);
+  }
+
+  var steps = mk("div", "steps");
+  steps.style.setProperty("--n", after);
+  var prev = mk("button", "prev"); prev.type = "button";
+  prev.appendChild(mk("small", "", "Алдыңғы"));
+  var next = mk("button", "next"); next.type = "button";
+  next.appendChild(mk("small", "", "Келесі"));
+  if (pos > 0) { prev.appendChild(mk("b", "", "← " + POEMS[vis[pos - 1]].title)); prev.addEventListener("click", function () { show(vis[pos - 1], true); }); }
+  else { prev.appendChild(mk("b", "", "—")); prev.disabled = true; }
+  if (pos < vis.length - 1) { next.appendChild(mk("b", "", POEMS[vis[pos + 1]].title + " →")); next.addEventListener("click", function () { show(vis[pos + 1], true); }); }
+  else { next.appendChild(mk("b", "", "—")); next.disabled = true; }
+  steps.appendChild(prev); steps.appendChild(next);
+  pageEl.appendChild(steps);
+
+  if (scroll) {
+    var calm = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+    pageEl.scrollIntoView({ behavior: calm ? "auto" : "smooth", block: "start" });
+  }
+}
+
+pickEl.addEventListener("change", function () { show(Number(pickEl.value), true); });
+
+["Барлығы", "Өмір", "Махаббат", "Отан", "Білім"].forEach(function (c, ci) {
+  var b = mk("button", "chip glass", c);
+  b.type = "button";
+  b.setAttribute("aria-pressed", ci === 0 ? "true" : "false");
+  b.addEventListener("click", function () {
+    filter = c;
+    Array.prototype.forEach.call(chipsEl.children, function (x) { x.setAttribute("aria-pressed", x === b ? "true" : "false"); });
+    buildList();
+    show(visible()[0], false);
+  });
+  chipsEl.appendChild(b);
+});
+
+buildList();
+show(0, false);
+
+/* day/night button */
+var themeBtn = document.getElementById("themeBtn");
+function syncThemeLabel() {
+  var dark = document.documentElement.getAttribute("data-theme") === "dark";
+  themeBtn.setAttribute("aria-label", dark ? "Күндізгі режимге ауысу" : "Түнгі режимге ауысу");
+  themeBtn.title = dark ? "Күн" : "Түн";
+}
+themeBtn.addEventListener("click", function () {
+  var next = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
+  document.documentElement.setAttribute("data-theme", next);
+  try { localStorage.setItem("adTheme", next); } catch (e) {}
+  syncThemeLabel();
+});
+syncThemeLabel();
+
+/* sky: twinkling stars and a shooting star at night, drifting golden dust by day */
+(function () {
+  var cv = document.getElementById("stars");
+  if (!cv || !cv.getContext) return;
+  var ctx = cv.getContext("2d");
+  var root = document.documentElement;
+  var calm = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var W = 0, H = 0, stars = [], motes = [], shoot = null, nextShoot = 4, last = 0, clock = 0, raf = 0;
+  function rnd(a, b) { return a + Math.random() * (b - a); }
+  function setup() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    cv.width = Math.round(W * d); cv.height = Math.round(H * d);
+    ctx.setTransform(d, 0, 0, d, 0, 0);
+    stars = []; motes = [];
+    var n = Math.min(170, Math.round(W * H / 8000)), i;
+    for (i = 0; i < n; i++) stars.push({ x: rnd(0, W), y: rnd(0, H), r: rnd(0.4, 1.5), p: rnd(0, 6.28), s: rnd(0.6, 2) });
+    var m = Math.min(45, Math.round(W * H / 24000));
+    for (i = 0; i < m; i++) motes.push({ x: rnd(0, W), y: rnd(0, H), r: rnd(1, 3), v: rnd(6, 18), p: rnd(0, 6.28), a: rnd(0.25, 0.6) });
+  }
+  function draw(dt) {
+    var dark = root.getAttribute("data-theme") === "dark", i;
+    clock += dt;
+    ctx.clearRect(0, 0, W, H);
+    if (dark) {
+      for (i = 0; i < stars.length; i++) {
+        var s = stars[i];
+        var a = calm ? 0.8 : 0.35 + 0.65 * (0.5 + 0.5 * Math.sin(clock * s.s + s.p));
+        ctx.globalAlpha = a;
+        ctx.fillStyle = "#ffffff";
+        ctx.beginPath(); ctx.arc(s.x, s.y, s.r, 0, 6.2832); ctx.fill();
+      }
+      ctx.globalAlpha = 1;
+      if (!calm) {
+        if (!shoot && clock > nextShoot) shoot = { x: rnd(W * 0.4, W), y: rnd(0, H * 0.35), life: 0 };
+        if (shoot) {
+          shoot.life += dt;
+          var p = shoot.life / 0.9;
+          if (p >= 1) { shoot = null; nextShoot = clock + rnd(6, 12); }
+          else {
+            var hx = shoot.x - p * W * 0.35, hy = shoot.y + p * W * 0.2;
+            var g = ctx.createLinearGradient(hx, hy, hx + 130, hy - 72);
+            g.addColorStop(0, "rgba(255,255,255," + (1 - p) + ")");
+            g.addColorStop(1, "rgba(255,255,255,0)");
+            ctx.strokeStyle = g; ctx.lineWidth = 2; ctx.lineCap = "round";
+            ctx.beginPath(); ctx.moveTo(hx, hy); ctx.lineTo(hx + 130, hy - 72); ctx.stroke();
+          }
+        }
+      }
+    } else {
+      for (i = 0; i < motes.length; i++) {
+        var q = motes[i];
+        if (!calm) {
+          q.y -= q.v * dt;
+          q.x += Math.sin(clock * 0.6 + q.p) * 8 * dt;
+          if (q.y < -10) { q.y = H + 10; q.x = rnd(0, W); }
+        }
+        ctx.globalAlpha = q.a * (0.6 + 0.4 * Math.sin(clock + q.p));
+        ctx.fillStyle = "#e8a020";
+        ctx.beginPath(); ctx.arc(q.x, q.y, q.r, 0, 6.2832); ctx.fill();
+      }
+      ctx.globalAlpha = 1;
+    }
+  }
+  function loop(now) {
+    var dt = last ? Math.min((now - last) / 1000, 0.1) : 0;
+    last = now;
+    draw(dt);
+    raf = requestAnimationFrame(loop);
+  }
+  function start() { if (calm || raf) return; last = 0; raf = requestAnimationFrame(loop); }
+  function stop() { if (raf) { cancelAnimationFrame(raf); raf = 0; } }
+  setup();
+  draw(0);
+  start();
+  document.addEventListener("visibilitychange", function () { if (document.hidden) stop(); else start(); });
+  var rt = 0;
+  window.addEventListener("resize", function () { clearTimeout(rt); rt = setTimeout(function () { setup(); draw(0); }, 150); });
+  if (window.MutationObserver) new MutationObserver(function () { draw(0); }).observe(root, { attributes: true, attributeFilter: ["data-theme"] });
+})();
+</script>
+
+</html>
